@@ -71,7 +71,8 @@ const base = $("base"), prop = $("prop"), manual = $("manual"), manualWrap = $("
       dateEl = $("date"), expiry = $("expiry"), linkEl = $("link"), qr = $("qr"), qrnote = $("qrnote");
 
 // remember base URL
-try{ base.value = localStorage.getItem("perla_base") || ""; }catch{}
+const DEFAULT_BASE = "https://perlahomes.github.io/Perlahomes-guide/";
+try{ base.value = localStorage.getItem("perla_base") || DEFAULT_BASE; }catch{ base.value = DEFAULT_BASE; }
 base.addEventListener("input", ()=>{ try{ localStorage.setItem("perla_base", base.value); }catch{}; update(); });
 
 // default checkout date = tomorrow
