@@ -133,6 +133,10 @@ img { display: block; max-width: 100%; }
 .card__expand { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 9px;
   background: rgba(24,34,46,.55); color: #fff; display: grid; place-items: center; backdrop-filter: blur(4px); }
 .card__expand svg { width: 16px; height: 16px; }
+.card__multi { position: absolute; left: 10px; bottom: 10px; background: rgba(24,34,46,.78); color: #fff;
+  font-size: .76rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; display: inline-flex;
+  align-items: center; gap: 4px; }
+.card__multi::before { content: "▦"; font-size: .8em; }
 .card__img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tint); }
 .card__pad { padding: 16px 18px 19px; }
 .card__title { font-weight: 700; font-size: 1.16rem; color: var(--ink); margin-bottom: 7px; }

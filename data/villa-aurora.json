@@ -85,7 +85,8 @@
             "en": "Use the code below to open the garage door. (Replace with the exact instructions.)",
             "el": "Χρησιμοποιήστε τον κωδικό παρακάτω για να ανοίξετε την πόρτα του γκαράζ. (Αντικαταστήστε με τις ακριβείς οδηγίες.)"
           },
-          "code": "0000"
+          "code": "0000",
+          "image2": "data/img/garage2.svg"
         },
         {
           "image": "data/img/parking.svg",

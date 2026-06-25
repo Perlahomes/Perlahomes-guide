@@ -163,7 +163,8 @@ const DEFAULTS = {
             "en": "Use the code below to open the garage door. (Replace with the exact instructions.)",
             "el": "Χρησιμοποιήστε τον κωδικό παρακάτω για να ανοίξετε την πόρτα του γκαράζ. (Αντικαταστήστε με τις ακριβείς οδηγίες.)"
           },
-          "code": "0000"
+          "code": "0000",
+          "image2": "data/img/garage2.svg"
         },
         {
           "image": "data/img/parking.svg",
@@ -783,6 +784,7 @@ function cardHTML(c, path){
       ${biField("Title",path+".title")}
       ${biField("Text",path+".body",true)}
       <div class="fld"><span>Photo</span><div class="photo">${thumb(c.image)}<div class="col"><input type="file" accept="image/*" data-photo="${path}.image" data-label="${esc(c.title.en||c.title.el||"photo")}"><input type="text" class="photoname" data-path="${path}.image" value="${esc(c.image||"")}" placeholder="or type a filename"></div></div></div>
+      <div class="fld"><span>Photo 2 (optional — e.g. a second instruction image)</span><div class="photo">${thumb(c.image2)}<div class="col"><input type="file" accept="image/*" data-photo="${path}.image2" data-label="${esc((c.title.en||c.title.el||"photo")+" 2")}"><input type="text" class="photoname" data-path="${path}.image2" value="${esc(c.image2||"")}" placeholder="or type a filename"></div></div></div>
       <details class="more"><summary>More options (map link · code · WiFi)</summary>
         <div class="row2">
           <label class="fld"><span>Map link (optional)</span><input type="text" data-path="${path}.mapUrl" value="${esc(c.mapUrl||"")}" placeholder="https://maps.google.com/?q=..."></label>
@@ -927,6 +929,7 @@ function txt(o){ const langs=M.meta.languages; const r={}; langs.forEach(l=>{ if
 function normImg(v){ if(!v)return undefined; v=v.trim(); if(/^(https?:|data:|data\/)/.test(v))return v; return "data/img/"+v.replace(/^.*[\\/]/,""); }
 function cleanCard(c){ if(c._on===false)return null; const card={};
   const im=normImg(c.image); if(im)card.image=im;
+  const im2=normImg(c.image2); if(im2)card.image2=im2;
   const tt=txt(c.title); if(tt)card.title=tt;
   const bb=txt(c.body); if(bb)card.body=bb;
   if(c.wifi&&(c.wifi.network||c.wifi.password)) card.wifi={network:c.wifi.network||"",password:c.wifi.password||""};
@@ -976,7 +979,7 @@ document.getElementById("btnLoad").addEventListener("click",()=>{
 document.getElementById("btnPreview").addEventListener("click",async()=>{
   const obj=build();
   // show uploaded photos in the preview by swapping paths for their data URLs
-  const swap=(o)=>{ if(o&&o.image&&THUMBS[o.image]) o.image=THUMBS[o.image]; };
+  const swap=(o)=>{ if(o&&o.image&&THUMBS[o.image]) o.image=THUMBS[o.image]; if(o&&o.image2&&THUMBS[o.image2]) o.image2=THUMBS[o.image2]; };
   if(obj.meta){ if(THUMBS[obj.meta.heroImage]) obj.meta.heroImage=THUMBS[obj.meta.heroImage]; if(THUMBS[obj.meta.brandLogo]) obj.meta.brandLogo=THUMBS[obj.meta.brandLogo]; }
   (obj.sections||[]).forEach(s=>{ (s.cards||[]).forEach(swap); (s.groups||[]).forEach(g=>(g.cards||[]).forEach(swap)); });
   const data=JSON.stringify(obj);

@@ -118,14 +118,34 @@
       ${bottomBar()}${waButton()}`;
   }
 
+  function imgs(c){
+    if (Array.isArray(c.images)) return c.images.filter(Boolean);
+    return [c.image, c.image2].filter(Boolean);
+  }
+  function chipsHTML(c){
+    if (c.wifi){
+      return `<div class="wifirow">
+        <button class="codebox" data-copy="${esc(c.wifi.network)}" data-what="WiFi"><span><span class="codebox__l">WiFi</span><span class="codebox__v">${esc(c.wifi.network)}</span></span><span class="codebox__c">${I.copy}</span></button>
+        <button class="codebox" data-copy="${esc(c.wifi.password)}" data-what="${LANG==="el"?"Κωδικός":"Password"}"><span><span class="codebox__l">${LANG==="el"?"Κωδικός":"Password"}</span><span class="codebox__v">${esc(c.wifi.password)}</span></span><span class="codebox__c">${I.copy}</span></button>
+      </div>`;
+    }
+    if (c.code){
+      return `<button class="codebox" data-copy="${esc(digits(c.code)||c.code)}" data-what="${esc(t(c.codeLabel)||t(c.title))}">
+        <span><span class="codebox__l">${esc(t(c.codeLabel)||(LANG==="el"?"Κωδικός":"Code"))}</span><span class="codebox__v">${esc(c.code)}</span></span><span class="codebox__c">${I.copy}</span></button>`;
+    }
+    return "";
+  }
+
   function cardHTML(c, idx){
+    const list = imgs(c);
     const mapb = c.mapUrl ? `<a class="mapbtn" href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${I.map}${esc(t(c.mapLabel)||(LANG==="el"?"Άνοιγμα στον χάρτη":"Open in Maps"))}</a>` : "";
     const open = (idx==null) ? "" : ` data-open="${idx}" role="button" tabindex="0"`;
     return `<article class="card${idx==null?"":" card--tap"}"${open}>
-      ${c.image ? `<div class="card__imgwrap"><img class="card__img" src="${esc(c.image)}" alt="" loading="lazy">${idx==null?"":`<span class="card__expand">${I.expand}</span>`}</div>` : ""}
+      ${list[0] ? `<div class="card__imgwrap"><img class="card__img" src="${esc(list[0])}" alt="" loading="lazy">${idx==null?"":`<span class="card__expand">${I.expand}</span>`}${list.length>1?`<span class="card__multi">+${list.length-1}</span>`:""}</div>` : ""}
       <div class="card__pad">
         ${c.title ? `<h2 class="card__title">${esc(t(c.title))}</h2>` : ""}
         ${c.body ? `<p class="card__body card__body--clamp">${esc(t(c.body))}</p>` : ""}
+        ${chipsHTML(c)}
         ${mapb}
       </div>
     </article>`;
@@ -138,24 +158,15 @@
   }
 
   function detailCardHTML(c){
-    let extra = "";
-    if (c.wifi){
-      extra = `<div class="wifirow">
-        <button class="codebox" data-copy="${esc(c.wifi.network)}" data-what="WiFi"><span><span class="codebox__l">WiFi</span><span class="codebox__v">${esc(c.wifi.network)}</span></span><span class="codebox__c">${I.copy}</span></button>
-        <button class="codebox" data-copy="${esc(c.wifi.password)}" data-what="${LANG==="el"?"Κωδικός":"Password"}"><span><span class="codebox__l">${LANG==="el"?"Κωδικός":"Password"}</span><span class="codebox__v">${esc(c.wifi.password)}</span></span><span class="codebox__c">${I.copy}</span></button>
-      </div>`;
-    } else if (c.code){
-      extra = `<button class="codebox" data-copy="${esc(digits(c.code)||c.code)}" data-what="${esc(t(c.codeLabel)||t(c.title))}">
-        <span><span class="codebox__l">${esc(t(c.codeLabel)||(LANG==="el"?"Κωδικός":"Code"))}</span><span class="codebox__v">${esc(c.code)}</span></span><span class="codebox__c">${I.copy}</span></button>`;
-    }
+    const list = imgs(c);
     const mapb = c.mapUrl ? `<a class="mapbtn" href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${I.map}${esc(t(c.mapLabel)||(LANG==="el"?"Άνοιγμα στον χάρτη":"Open in Maps"))}</a>` : "";
     return `<div class="slide">
       <div class="slide__card">
-        ${c.image ? `<img class="slide__img" src="${esc(c.image)}" alt="">` : ""}
+        ${list.map(src=>`<img class="slide__img" src="${esc(src)}" alt="">`).join("")}
         <div class="slide__pad">
           ${c.title ? `<h2 class="slide__title">${esc(t(c.title))}</h2>` : ""}
           ${c.body ? `<p class="slide__body">${esc(t(c.body))}</p>` : ""}
-          ${extra}${mapb}
+          ${chipsHTML(c)}${mapb}
         </div>
       </div>
     </div>`;

@@ -137,6 +137,10 @@ img { display: block; max-width: 100%; }
 .card__expand { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 9px;
   background: rgba(24,34,46,.55); color: #fff; display: grid; place-items: center; backdrop-filter: blur(4px); }
 .card__expand svg { width: 16px; height: 16px; }
+.card__multi { position: absolute; left: 10px; bottom: 10px; background: rgba(24,34,46,.78); color: #fff;
+  font-size: .76rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; display: inline-flex;
+  align-items: center; gap: 4px; }
+.card__multi::before { content: "▦"; font-size: .8em; }
 .card__img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tint); }
 .card__pad { padding: 16px 18px 19px; }
 .card__title { font-weight: 700; font-size: 1.16rem; color: var(--ink); margin-bottom: 7px; }
@@ -328,7 +332,8 @@ img { display: block; max-width: 100%; }
             "en": "Use the code below to open the garage door. (Replace with the exact instructions.)",
             "el": "Χρησιμοποιήστε τον κωδικό παρακάτω για να ανοίξετε την πόρτα του γκαράζ. (Αντικαταστήστε με τις ακριβείς οδηγίες.)"
           },
-          "code": "0000"
+          "code": "0000",
+          "image2": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9Ijc2MCIgdmlld0JveD0iMCAwIDEyMDAgNzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjQ4NTMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM2Yzc4ODQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3NjAiIGZpbGw9InVybCgjZykiLz48ZyBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjkyIj48dGV4dCB4PSI1MCUiIHk9IjQ4JSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9IjQwIj5HYXJhZ2UgZG9vciDigJQgc3RlcCAyPC90ZXh0Pjx0ZXh0IHg9IjUwJSIgeT0iNTYlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIG9wYWNpdHk9IjAuOCI+cmVwbGFjZSBpbiBkYXRhL2ltZy88L3RleHQ+PC9nPjwvc3ZnPg=="
         },
         {
           "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9Ijc2MCIgdmlld0JveD0iMCAwIDEyMDAgNzYwIj4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNWE1ZTJiIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOWFhMTVhIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9Ijc2MCIgZmlsbD0idXJsKCNnKSIvPgo8ZyBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjkyIj4KPHRleHQgeD0iNTAlIiB5PSI0OCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSI0MCI+UGFya2luZyDigJQgc2F0ZWxsaXRlICsgbWFya2VyPC90ZXh0Pgo8dGV4dCB4PSI1MCUiIHk9IjU2JSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBvcGFjaXR5PSIwLjgiPnJlcGxhY2UgaW4gZGF0YS9pbWcvPC90ZXh0Pgo8L2c+PC9zdmc+",
@@ -985,14 +990,34 @@ img { display: block; max-width: 100%; }
       ${bottomBar()}${waButton()}`;
   }
 
+  function imgs(c){
+    if (Array.isArray(c.images)) return c.images.filter(Boolean);
+    return [c.image, c.image2].filter(Boolean);
+  }
+  function chipsHTML(c){
+    if (c.wifi){
+      return `<div class="wifirow">
+        <button class="codebox" data-copy="${esc(c.wifi.network)}" data-what="WiFi"><span><span class="codebox__l">WiFi</span><span class="codebox__v">${esc(c.wifi.network)}</span></span><span class="codebox__c">${I.copy}</span></button>
+        <button class="codebox" data-copy="${esc(c.wifi.password)}" data-what="${LANG==="el"?"Κωδικός":"Password"}"><span><span class="codebox__l">${LANG==="el"?"Κωδικός":"Password"}</span><span class="codebox__v">${esc(c.wifi.password)}</span></span><span class="codebox__c">${I.copy}</span></button>
+      </div>`;
+    }
+    if (c.code){
+      return `<button class="codebox" data-copy="${esc(digits(c.code)||c.code)}" data-what="${esc(t(c.codeLabel)||t(c.title))}">
+        <span><span class="codebox__l">${esc(t(c.codeLabel)||(LANG==="el"?"Κωδικός":"Code"))}</span><span class="codebox__v">${esc(c.code)}</span></span><span class="codebox__c">${I.copy}</span></button>`;
+    }
+    return "";
+  }
+
   function cardHTML(c, idx){
+    const list = imgs(c);
     const mapb = c.mapUrl ? `<a class="mapbtn" href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${I.map}${esc(t(c.mapLabel)||(LANG==="el"?"Άνοιγμα στον χάρτη":"Open in Maps"))}</a>` : "";
     const open = (idx==null) ? "" : ` data-open="${idx}" role="button" tabindex="0"`;
     return `<article class="card${idx==null?"":" card--tap"}"${open}>
-      ${c.image ? `<div class="card__imgwrap"><img class="card__img" src="${esc(c.image)}" alt="" loading="lazy">${idx==null?"":`<span class="card__expand">${I.expand}</span>`}</div>` : ""}
+      ${list[0] ? `<div class="card__imgwrap"><img class="card__img" src="${esc(list[0])}" alt="" loading="lazy">${idx==null?"":`<span class="card__expand">${I.expand}</span>`}${list.length>1?`<span class="card__multi">+${list.length-1}</span>`:""}</div>` : ""}
       <div class="card__pad">
         ${c.title ? `<h2 class="card__title">${esc(t(c.title))}</h2>` : ""}
         ${c.body ? `<p class="card__body card__body--clamp">${esc(t(c.body))}</p>` : ""}
+        ${chipsHTML(c)}
         ${mapb}
       </div>
     </article>`;
@@ -1005,24 +1030,15 @@ img { display: block; max-width: 100%; }
   }
 
   function detailCardHTML(c){
-    let extra = "";
-    if (c.wifi){
-      extra = `<div class="wifirow">
-        <button class="codebox" data-copy="${esc(c.wifi.network)}" data-what="WiFi"><span><span class="codebox__l">WiFi</span><span class="codebox__v">${esc(c.wifi.network)}</span></span><span class="codebox__c">${I.copy}</span></button>
-        <button class="codebox" data-copy="${esc(c.wifi.password)}" data-what="${LANG==="el"?"Κωδικός":"Password"}"><span><span class="codebox__l">${LANG==="el"?"Κωδικός":"Password"}</span><span class="codebox__v">${esc(c.wifi.password)}</span></span><span class="codebox__c">${I.copy}</span></button>
-      </div>`;
-    } else if (c.code){
-      extra = `<button class="codebox" data-copy="${esc(digits(c.code)||c.code)}" data-what="${esc(t(c.codeLabel)||t(c.title))}">
-        <span><span class="codebox__l">${esc(t(c.codeLabel)||(LANG==="el"?"Κωδικός":"Code"))}</span><span class="codebox__v">${esc(c.code)}</span></span><span class="codebox__c">${I.copy}</span></button>`;
-    }
+    const list = imgs(c);
     const mapb = c.mapUrl ? `<a class="mapbtn" href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${I.map}${esc(t(c.mapLabel)||(LANG==="el"?"Άνοιγμα στον χάρτη":"Open in Maps"))}</a>` : "";
     return `<div class="slide">
       <div class="slide__card">
-        ${c.image ? `<img class="slide__img" src="${esc(c.image)}" alt="">` : ""}
+        ${list.map(src=>`<img class="slide__img" src="${esc(src)}" alt="">`).join("")}
         <div class="slide__pad">
           ${c.title ? `<h2 class="slide__title">${esc(t(c.title))}</h2>` : ""}
           ${c.body ? `<p class="slide__body">${esc(t(c.body))}</p>` : ""}
-          ${extra}${mapb}
+          ${chipsHTML(c)}${mapb}
         </div>
       </div>
     </div>`;
