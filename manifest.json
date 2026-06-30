@@ -1,6 +1,6 @@
 {
-  "name": "Perlahomes Guest Guide",
-  "short_name": "Perlahomes",
+  "name": "Perla Homes Guest Guide",
+  "short_name": "Perla Homes",
   "description": "Your guest guide: access codes, WiFi, directions and local tips.",
   "start_url": "./",
   "scope": "./",
