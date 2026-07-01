@@ -237,10 +237,28 @@
                 "en": "Check-out",
                 "el": "Check-out"
               },
-              "body": {
-                "en": "As you will be checking out without our presence and the property may remain unattended until our team arrives, we kindly ask you to carefully follow the instructions below before your departure:\n• Ensure that all doors are fully closed and locked.\n• Ensure that all windows are completely closed and secured.\n• Turn off any unnecessary electrical appliances.\nThese measures are extremely important for the safety and protection of the villa.\nThank you for your cooperation and for helping us keep the property safe.\n",
-                "el": "Καθώς η αναχώρησή σας θα πραγματοποιηθεί χωρίς την παρουσία μέλους της ομάδας μας και το κατάλυμα ενδέχεται να παραμείνει χωρίς επίβλεψη μέχρι την άφιξη του προσωπικού μας, παρακαλούμε να δώσετε ιδιαίτερη προσοχή στα παρακάτω πριν την αναχώρησή σας:\n• Βεβαιωθείτε ότι όλες οι πόρτες είναι πλήρως κλειστές και κλειδωμένες.\n• Βεβαιωθείτε ότι όλα τα παράθυρα είναι πλήρως κλειστά και ασφαλισμένα.\n• Απενεργοποιήστε τυχόν ηλεκτρικές συσκευές που δεν είναι απαραίτητο να παραμείνουν σε λειτουργία.\n"
-              }
+              "checklist": [
+                {
+                  "en": "Close all windows",
+                  "el": "Κλείστε όλα τα παράθυρα"
+                },
+                {
+                  "en": "Turn off the lights & A/C",
+                  "el": "Σβήστε τα φώτα & το A/C"
+                },
+                {
+                  "en": "Close the door",
+                  "el": "Κλειδώστε την πόρτα"
+                },
+                {
+                  "en": "Leave the keys in the KeyLock",
+                  "el": "Αφήστε τα κλειδιά στην κλειδοθήκη"
+                },
+                {
+                  "en": "Have a safe trip!",
+                  "el": "Καλή επιστροφή!"
+                }
+              ]
             }
           ]
         }
