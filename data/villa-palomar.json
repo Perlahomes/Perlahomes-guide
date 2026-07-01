@@ -179,17 +179,6 @@
               }
             },
             {
-              "image": "data/img/tapwater.svg",
-              "title": {
-                "en": "Tap water",
-                "el": "Νερό βρύσης"
-              },
-              "body": {
-                "en": "Tap water is not recommended for drinking. However, it is suitable for cooking, as well as for bathing and personal hygiene.",
-                "el": "Το νερό της βρύσης δεν συνιστάται για πόση. Ωστόσο, είναι κατάλληλο για μαγείρεμα, καθώς και για μπάνιο και προσωπική υγιεινή."
-              }
-            },
-            {
               "image": "data/img/villa-palomar-hot-water.jpg",
               "title": {
                 "en": "Hot water",
@@ -250,7 +239,29 @@
               "body": {
                 "en": "As you will be checking out without our presence and the property may remain unattended until our team arrives, we kindly ask you to carefully follow the instructions below before your departure:\n• Ensure that all doors are fully closed and locked.\n• Ensure that all windows are completely closed and secured.\n• Turn off any unnecessary electrical appliances.\nThese measures are extremely important for the safety and protection of the villa.\nThank you for your cooperation and for helping us keep the property safe.\n",
                 "el": "Καθώς η αναχώρησή σας θα πραγματοποιηθεί χωρίς την παρουσία μέλους της ομάδας μας και το κατάλυμα ενδέχεται να παραμείνει χωρίς επίβλεψη μέχρι την άφιξη του προσωπικού μας, παρακαλούμε να δώσετε ιδιαίτερη προσοχή στα παρακάτω πριν την αναχώρησή σας:\n• Βεβαιωθείτε ότι όλες οι πόρτες είναι πλήρως κλειστές και κλειδωμένες.\n• Βεβαιωθείτε ότι όλα τα παράθυρα είναι πλήρως κλειστά και ασφαλισμένα.\n• Απενεργοποιήστε τυχόν ηλεκτρικές συσκευές που δεν είναι απαραίτητο να παραμείνουν σε λειτουργία.\n"
-              }
+              },
+              "checklist": [
+                {
+                  "en": "Close all windows",
+                  "el": "Κλείστε όλα τα παράθυρα"
+                },
+                {
+                  "en": "Turn off the lights & A/C",
+                  "el": "Σβήστε τα φώτα & το A/C"
+                },
+                {
+                  "en": "Leave the keys on the table",
+                  "el": "Αφήστε τα κλειδιά στο τραπέζι"
+                },
+                {
+                  "en": "Lock the door",
+                  "el": "Κλειδώστε την πόρτα"
+                },
+                {
+                  "en": "Have a safe trip!",
+                  "el": "Καλή επιστροφή!"
+                }
+              ]
             }
           ]
         }
@@ -264,33 +275,10 @@
         "el": "Η γειτονιά"
       },
       "intro": {
-        "en": "Our area is close to Nafplio, and you'll find everything you need for daily essentials a short distance away.",
-        "el": "Η περιοχή μας βρίσκεται κοντά στο Ναύπλιο και θα βρείτε ότι χρειαστείτε από είδη πρώτης ανάγκης σε κοντινή απόσταση."
+        "en": "The essentials close to the villa.",
+        "el": "Τα απαραίτητα κοντά στη βίλα."
       },
-      "cards": [
-        {
-          "image": "data/img/minimarket.svg",
-          "title": {
-            "en": "Mini market",
-            "el": "Μίνι μάρκετ"
-          },
-          "body": {
-            "en": "For essentials, visit the mini market in the village square, about 2 minutes by car. It has basic products, tobacco and some greengrocer items.",
-            "el": "Για είδη πρώτης ανάγκης μπορείτε να επισκεφθείτε το μίνι μάρκετ στην πλατεία του χωριού, περίπου 2 λεπτά με το αυτοκίνητο. Διαθέτει βασικά προϊόντα, είδη καπνού και ορισμένα είδη μαναβικής."
-          }
-        },
-        {
-          "image": "data/img/pharmacy.svg",
-          "title": {
-            "en": "Pharmacy",
-            "el": "Φαρμακείο"
-          },
-          "body": {
-            "en": "The nearest pharmacy is in the village, about a 5-minute drive. Ask us about the on-duty pharmacy at night.",
-            "el": "Το πλησιέστερο φαρμακείο βρίσκεται στο χωριό, περίπου 5 λεπτά με το αυτοκίνητο. Ρωτήστε μας για το εφημερεύον φαρμακείο τη νύχτα."
-          }
-        }
-      ]
+      "link": "https://messinia.mobi/el/article/katalumata/villas/villa-palomar-enoikiazomenes-billes/11417"
     },
     {
       "id": "beaches",
@@ -299,24 +287,11 @@
         "en": "Nearby beaches",
         "el": "Κοντινές παραλίες"
       },
-      "cards": [
-        {
-          "image": "data/img/beach.svg",
-          "title": {
-            "en": "Ritsa Beach",
-            "el": "Παραλία Ρίτσα"
-          },
-          "body": {
-            "en": "Pebble beach, calm water, shade in the morning. A 4-minute walk away.",
-            "el": "Παραλία με βότσαλα, ήρεμα νερά, σκιά το πρωί. 4 λεπτά με τα πόδια."
-          },
-          "mapUrl": "https://maps.google.com/?q=beach+Poros",
-          "mapLabel": {
-            "en": "Open in Maps",
-            "el": "Άνοιγμα στον χάρτη"
-          }
-        }
-      ]
+      "intro": {
+        "en": "Long sandy beaches and quiet coves line this stretch of the Messinian coast — these are our favourites near the villa.",
+        "el": "Μεγάλες αμμώδεις παραλίες και ήσυχοι κολπίσκοι κατά μήκος της μεσσηνιακής ακτής — οι αγαπημένες μας κοντά στη βίλα."
+      },
+      "link": "https://messinia.mobi/el/article/katalumata/villas/villa-palomar-enoikiazomenes-billes/11417"
     },
     {
       "id": "sights",
@@ -326,51 +301,10 @@
         "el": "Αξιοθέατα"
       },
       "intro": {
-        "en": "The Nafplio area, and Argolida as a whole, has unique sights including three UNESCO monuments. We've put together a guide to the best of what's worth visiting.",
-        "el": "Η περιοχή του Ναυπλίου, και συνολικά η Αργολίδα, διαθέτει μοναδικά αξιοθέατα συμπεριλαμβανομένων τριών μνημείων UNESCO. Δημιουργήσαμε έναν οδηγό με τα καλύτερα που αξίζει να επισκεφτείτε."
+        "en": "From Kyparissia's castle and old town to world-class ancient sites — here's the best to see nearby and on a day trip.",
+        "el": "Από το κάστρο και την παλιά πόλη της Κυπαρισσίας μέχρι κορυφαίους αρχαιολογικούς χώρους — δείτε τι αξίζει κοντά και σε εκδρομή."
       },
-      "groups": [
-        {
-          "label": {
-            "en": "Sights of Nafplio",
-            "el": "Αξιοθέατα Ναυπλίου"
-          },
-          "cards": [
-            {
-              "image": "data/img/palamidi.svg",
-              "title": {
-                "en": "Palamidi Fortress",
-                "el": "Φρούριο Παλαμήδι"
-              },
-              "body": {
-                "en": "The most beautiful castle in Greece.",
-                "el": "Το ομορφότερο κάστρο της Ελλάδας"
-              },
-              "mapUrl": "https://maps.google.com/?q=Palamidi+Nafplio",
-              "mapLabel": {
-                "en": "Open in Maps",
-                "el": "Άνοιγμα στον χάρτη"
-              }
-            },
-            {
-              "image": "data/img/oldtown.svg",
-              "title": {
-                "en": "Nafplio Old Town",
-                "el": "Παλιά Πόλη Ναυπλίου"
-              },
-              "body": {
-                "en": "Wander the marble alleys, Syntagma Square and the seafront — ideal at sunset.",
-                "el": "Περπατήστε στα μαρμάρινα σοκάκια, την πλατεία Συντάγματος και την παραλία — ιδανικά το ηλιοβασίλεμα."
-              },
-              "mapUrl": "https://maps.google.com/?q=Nafplio+Old+Town",
-              "mapLabel": {
-                "en": "Open in Maps",
-                "el": "Άνοιγμα στον χάρτη"
-              }
-            }
-          ]
-        }
-      ]
+      "link": "https://messinia.mobi/el/article/katalumata/villas/villa-palomar-enoikiazomenes-billes/11417"
     },
     {
       "id": "restaurants",
@@ -379,24 +313,11 @@
         "en": "Restaurants",
         "el": "Εστιατόρια"
       },
-      "cards": [
-        {
-          "image": "data/img/restaurant.svg",
-          "title": {
-            "en": "Lola Taverna",
-            "el": "Ταβέρνα Λόλα"
-          },
-          "body": {
-            "en": "Family-run taverna by the sea. Order the grilled octopus.",
-            "el": "Οικογενειακή ταβέρνα δίπλα στη θάλασσα. Δοκιμάστε το χταπόδι σχάρας."
-          },
-          "mapUrl": "https://maps.google.com/?q=taverna+Poros",
-          "mapLabel": {
-            "en": "Open in Maps",
-            "el": "Άνοιγμα στον χάρτη"
-          }
-        }
-      ]
+      "intro": {
+        "en": "Our favourite tavernas and restaurants in and around Kyparissia.",
+        "el": "Οι αγαπημένες μας ταβέρνες και εστιατόρια στην Κυπαρισσία και γύρω από αυτήν."
+      },
+      "link": "https://messinia.mobi/el/article/katalumata/villas/villa-palomar-enoikiazomenes-billes/11417"
     },
     {
       "id": "activities",
@@ -409,71 +330,7 @@
         "en": "In our area you can do plenty of activities and discover its beautiful nature and cultural wealth. We've selected reliable, excellent partners and recommend them to you.",
         "el": "Στην περιοχή μας μπορείτε να κάνετε αρκετές δραστηριότητες και να ανακαλύψετε την όμορφη φύση αλλά και τον πολιτιστικό της πλούτο. Επιλέξαμε για εσάς και σας προτείνουμε αξιόπιστους και εξαιρετικούς συνεργάτες."
       },
-      "cards": [
-        {
-          "image": "data/img/cruise.svg",
-          "title": {
-            "en": "Day cruise — Hydra & Spetses",
-            "el": "Μονοήμερη κρουαζιέρα Ύδρα & Σπέτσες"
-          },
-          "body": {
-            "en": "Departure is early in the morning. We handle the ticket booking — contact us.",
-            "el": "Η αναχώρηση γίνεται νωρίς το πρωί | Αναλαμβάνουμε την κράτηση εισιτηρίων, επικοινωνήστε μαζί μας."
-          }
-        },
-        {
-          "image": "data/img/sailing.svg",
-          "title": {
-            "en": "Sailing — Private cruises in the Argolic Gulf",
-            "el": "Sailing - Ιδιωτικές κρουαζιέρες στον Αργολικό"
-          },
-          "body": {
-            "en": "For information and bookings, contact us.",
-            "el": "Για πληροφορίες / κρατήσεις επικοινωνήστε μαζί μας."
-          }
-        },
-        {
-          "image": "data/img/fishing.svg",
-          "title": {
-            "en": "Tolo Fishing Trips",
-            "el": "Tolo Fishing Trips"
-          },
-          "body": {
-            "en": "For information and bookings, contact us.",
-            "el": "Για πληροφορίες / κρατήσεις επικοινωνήστε μαζί μας."
-          }
-        }
-      ]
-    },
-    {
-      "id": "transfers",
-      "icon": "transfers",
-      "title": {
-        "en": "Transfers",
-        "el": "Μεταφορές"
-      },
-      "cards": [
-        {
-          "image": "data/img/carrental.svg",
-          "title": {
-            "en": "Local taxi",
-            "el": "Τοπικό ταξί"
-          },
-          "body": {
-            "en": "Reliable driver for the airport or day trips. Message us on WhatsApp and we'll arrange it.",
-            "el": "Αξιόπιστος οδηγός για αεροδρόμιο ή εκδρομές. Στείλτε μήνυμα στο WhatsApp και θα το κανονίσουμε."
-          }
-        }
-      ]
-    },
-    {
-      "id": "rateus",
-      "icon": "rateus",
-      "title": {
-        "en": "Rate us",
-        "el": "Αξιολογήστε μας"
-      },
-      "link": "https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID"
+      "link": "https://messinia.mobi/el/article/katalumata/villas/villa-palomar-enoikiazomenes-billes/11417"
     }
   ]
 }
