@@ -390,6 +390,38 @@ const DEFAULTS = {
                 "en": "In the event of a power cut, the system powers the house automatically, with autonomy of about two hours.",
                 "el": "Σε περίπτωση διακοπής ρεύματος, το σύστημα τροφοδοτεί το σπίτι αυτόματα, με αυτονομία περίπου δύο ωρών."
               }
+            },
+            {
+              "title": {
+                "en": "Check-out",
+                "el": "Αναχώρηση"
+              },
+              "body": {
+                "en": "Check-out is by 11:00. A quick checklist before you go:",
+                "el": "Η αναχώρηση είναι έως τις 11:00. Μια γρήγορη λίστα πριν φύγετε:"
+              },
+              "checklist": [
+                {
+                  "en": "Close all windows",
+                  "el": "Κλείστε όλα τα παράθυρα"
+                },
+                {
+                  "en": "Turn off the lights & A/C",
+                  "el": "Σβήστε τα φώτα & το A/C"
+                },
+                {
+                  "en": "Leave the keys on the table",
+                  "el": "Αφήστε τα κλειδιά στο τραπέζι"
+                },
+                {
+                  "en": "Lock the door",
+                  "el": "Κλειδώστε την πόρτα"
+                },
+                {
+                  "en": "Have a safe trip!",
+                  "el": "Καλή επιστροφή!"
+                }
+              ]
             }
           ]
         },
@@ -768,6 +800,12 @@ function biField(label,path,textarea){
   });
   return h;
 }
+function clistText(arr,l){ return (Array.isArray(arr)?arr:[]).map(it=> (typeof it==='string') ? (l==='en'?it:'') : ((it&&it[l])||'') ).join("\n"); }
+function clistField(path, arr){
+  const langs=M.meta.languages; let h=`<div class="fld"><span>Checklist — one item per line (optional)</span>`;
+  langs.forEach(l=>{ h+=`<textarea class="clist" data-clist="${path}" data-lang="${l}" placeholder="One item per line${langs.length>1?' ('+l.toUpperCase()+')':''}">${esc(clistText(arr,l))}</textarea>`; });
+  return h+`</div>`;
+}
 function cardHTML(c, path){
   const title = esc(c.title.en||c.title.el||"(untitled)");
   const hasWifi = !!c.wifi, hasCode = c.code!=null, hasMap = c.mapUrl!=null;
@@ -783,11 +821,13 @@ function cardHTML(c, path){
     <div class="inner">
       ${biField("Title",path+".title")}
       ${biField("Text",path+".body",true)}
+      ${clistField(path, c.checklist)}
       <div class="fld"><span>Photo</span><div class="photo">${thumb(c.image)}<div class="col"><input type="file" accept="image/*" data-photo="${path}.image" data-label="${esc(c.title.en||c.title.el||"photo")}"><input type="text" class="photoname" data-path="${path}.image" value="${esc(c.image||"")}" placeholder="or type a filename"></div></div></div>
       <div class="fld"><span>Photo 2 (optional — e.g. a second instruction image)</span><div class="photo">${thumb(c.image2)}<div class="col"><input type="file" accept="image/*" data-photo="${path}.image2" data-label="${esc((c.title.en||c.title.el||"photo")+" 2")}"><input type="text" class="photoname" data-path="${path}.image2" value="${esc(c.image2||"")}" placeholder="or type a filename"></div></div></div>
       <details class="more"><summary>More options (map link · code · WiFi)</summary>
         <div class="row2">
           <label class="fld"><span>Map link (optional)</span><input type="text" data-path="${path}.mapUrl" value="${esc(c.mapUrl||"")}" placeholder="https://maps.google.com/?q=..."></label>
+          <label class="fld"><span>Distance / time (optional)</span><input type="text" data-path="${path}.distance" value="${esc((c.distance&&(c.distance.en||c.distance))||"")}" placeholder="e.g. 3.6 km or 15 min"></label>
           <label class="fld"><span>Door / lockbox code (optional)</span><input type="text" data-path="${path}.code" value="${esc(c.code||"")}" placeholder="e.g. 4729"></label>
           <label class="fld"><span>WiFi network (optional)</span><input type="text" data-path="${path}.wifi.network" value="${esc(c.wifi?c.wifi.network:"")}"></label>
           <label class="fld"><span>WiFi password (optional)</span><input type="text" data-path="${path}.wifi.password" value="${esc(c.wifi?c.wifi.password:"")}"></label>
@@ -894,6 +934,15 @@ document.getElementById("form").addEventListener("change", async (e)=>{
     render();
   }
 });
+document.getElementById("form").addEventListener("input",(e)=>{
+  const cl=e.target.closest(".clist"); if(!cl) return;
+  const path=cl.dataset.clist, form=document.getElementById("form"), langs=M.meta.languages, vals={};
+  langs.forEach(l=>{ const ta=form.querySelector('.clist[data-clist="'+path+'"][data-lang="'+l+'"]'); vals[l]=(ta?ta.value:"").split("\n"); });
+  const n=Math.max(0,...langs.map(l=>vals[l].length)); const arr=[];
+  for(let i=0;i<n;i++){ const item={}; let any=false; langs.forEach(l=>{ const v=(vals[l][i]||"").trim(); if(v){item[l]=v; any=true;} }); if(any) arr.push(item); }
+  setP(path+".checklist", arr); refreshJSON();
+});
+
 document.getElementById("form").addEventListener("click",(e)=>{
   // toggle switches (cards live inside <summary>, so stop the card from expanding)
   const sw = e.target.closest(".sw");
@@ -932,9 +981,11 @@ function cleanCard(c){ if(c._on===false)return null; const card={};
   const im2=normImg(c.image2); if(im2)card.image2=im2;
   const tt=txt(c.title); if(tt)card.title=tt;
   const bb=txt(c.body); if(bb)card.body=bb;
+  if(Array.isArray(c.checklist)&&c.checklist.length){ const cl=c.checklist.map(it=>txt(it)).filter(Boolean); if(cl.length)card.checklist=cl; }
   if(c.wifi&&(c.wifi.network||c.wifi.password)) card.wifi={network:c.wifi.network||"",password:c.wifi.password||""};
   if(c.code&&String(c.code).trim()){ card.code=c.code; const cl=txt(c.codeLabel||{en:"Code",el:"Κωδικός"}); if(cl)card.codeLabel=cl; }
   if(c.mapUrl&&c.mapUrl.trim()){ card.mapUrl=c.mapUrl; const ml=txt(c.mapLabel||{en:"Open in Maps",el:"Άνοιγμα στον χάρτη"}); if(ml)card.mapLabel=ml; }
+  if(c.distance&&String(c.distance.en||c.distance).trim()){ card.distance=c.distance; }
   return Object.keys(card).length?card:null;
 }
 function build(){

@@ -56,6 +56,7 @@
     swipe:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-4 5 4 5M15 7l4 5-4 5"/></svg>',
     chev:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>',
     map:       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 4 6 2 5-2v14l-5 2-6-2-5 2V6l5-2Z"/><path d="M9 4v14M15 6v14"/></svg>',
+    pin:       '<svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 2a7 7 0 0 0-7 7c0 4.9 5.4 11.4 6.6 12.8a.6.6 0 0 0 .9 0C13.6 20.4 19 13.9 19 9a7 7 0 0 0-7-7Zm0 4.4A2.6 2.6 0 1 0 12 11.6 2.6 2.6 0 0 0 12 6.4Z"/></svg>',
     copy:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
     wa:        '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-4-4.6-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.3.5-.4.6-.6.9-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1.2-.2.7-.9.9-1.1.2-.3.4-.2.7-.1.3.1 1.7.8 1.9.9.3.2.5.2.5.4.1.1.1.7-.1 1.3Z"/></svg>',
     viber:     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c-5 0-8.7 3.2-8.7 7.4 0 2.2 1 4.1 2.8 5.5l-.6 3.3c-.05.27.24.48.48.34l3.1-1.7c.95.2 1.9.2 2.9.2 5 0 8.7-3.2 8.7-7.4S17 2.2 12 2.2Zm3.9 10.2c-.2.5-.9 1-1.5 1.1-.4.05-.9.1-2.7-.7-2.3-1-3.7-3.3-3.8-3.5-.1-.15-.9-1.2-.9-2.3 0-1.1.6-1.6.8-1.85.2-.2.45-.27.6-.27h.45c.15 0 .33-.03.5.4.2.5.65 1.7.7 1.8.05.1.08.25.02.4-.27.55-.55.6-.75.85-.1.12-.2.25-.1.45.1.2.55.95 1.2 1.5.85.7 1.5.95 1.7 1.05.15.08.3.06.42-.08.17-.18.62-.72.79-.97.12-.18.27-.13.45-.07.2.07 1.25.6 1.45.7.2.1.34.15.4.23.05.1.05.6-.15 1.07Z"/></svg>',
@@ -112,7 +113,7 @@
       <div class="guide-label">${LANG==="el"?"Οδηγός":"Guide"}</div>
       <div class="grid">
         ${sections.map((s,i)=> s.link
-          ? `<a class="tile" href="${esc(s.link)}" target="_blank" rel="noopener">${I[s.icon]||I.info}<span>${esc(t(s.title))}</span></a>`
+          ? `<a class="tile" href="${esc(t(s.link))}" target="_blank" rel="noopener">${I[s.icon]||I.info}<span>${esc(t(s.title))}</span></a>`
           : `<button class="tile" data-go="${i}">${I[s.icon]||I.info}<span>${esc(t(s.title))}</span></button>`).join("")}
       </div>
       ${bottomBar()}${waButton()}`;
@@ -121,6 +122,12 @@
   function imgs(c){
     if (Array.isArray(c.images)) return c.images.filter(Boolean);
     return [c.image, c.image2].filter(Boolean);
+  }
+  function checklistHTML(c){
+    if (!Array.isArray(c.checklist) || !c.checklist.length) return "";
+    return `<ul class="checklist">` + c.checklist.map(it =>
+      `<li><button type="button" class="chk"><span class="box"></span><span class="chk__t">${esc(t(it))}</span></button></li>`
+    ).join("") + `</ul>`;
   }
   function chipsHTML(c){
     if (c.wifi){
@@ -138,13 +145,15 @@
 
   function cardHTML(c, idx){
     const list = imgs(c);
-    const mapb = c.mapUrl ? `<a class="mapbtn" href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${I.map}${esc(t(c.mapLabel)||(LANG==="el"?"Άνοιγμα στον χάρτη":"Open in Maps"))}</a>` : "";
+    const mapb = c.mapUrl ? `<a class="mapbtn" href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${I.pin}${esc(t(c.mapLabel)||(LANG==="el"?"Άνοιγμα στον χάρτη":"Open in Maps"))}</a>` : "";
     const open = (idx==null) ? "" : ` data-open="${idx}" role="button" tabindex="0"`;
     return `<article class="card${idx==null?"":" card--tap"}"${open}>
       ${list[0] ? `<div class="card__imgwrap"><img class="card__img" src="${esc(list[0])}" alt="" loading="lazy">${idx==null?"":`<span class="card__expand">${I.expand}</span>`}${list.length>1?`<span class="card__multi">+${list.length-1}</span>`:""}</div>` : ""}
       <div class="card__pad">
+        ${c.distance ? `<span class="distpill">${I.pin}${esc(t(c.distance))}</span>` : ""}
         ${c.title ? `<h2 class="card__title">${esc(t(c.title))}</h2>` : ""}
         ${c.body ? `<p class="card__body card__body--clamp">${esc(t(c.body))}</p>` : ""}
+        ${checklistHTML(c)}
         ${chipsHTML(c)}
         ${mapb}
       </div>
@@ -159,14 +168,15 @@
 
   function detailCardHTML(c){
     const list = imgs(c);
-    const mapb = c.mapUrl ? `<a class="mapbtn" href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${I.map}${esc(t(c.mapLabel)||(LANG==="el"?"Άνοιγμα στον χάρτη":"Open in Maps"))}</a>` : "";
+    const mapb = c.mapUrl ? `<a class="mapbtn" href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${I.pin}${esc(t(c.mapLabel)||(LANG==="el"?"Άνοιγμα στον χάρτη":"Open in Maps"))}</a>` : "";
     return `<div class="slide">
       <div class="slide__card">
         ${list.map(src=>`<img class="slide__img" src="${esc(src)}" alt="">`).join("")}
         <div class="slide__pad">
+          ${c.distance ? `<span class="distpill">${I.pin}${esc(t(c.distance))}</span>` : ""}
           ${c.title ? `<h2 class="slide__title">${esc(t(c.title))}</h2>` : ""}
           ${c.body ? `<p class="slide__body">${esc(t(c.body))}</p>` : ""}
-          ${chipsHTML(c)}${mapb}
+          ${checklistHTML(c)}${chipsHTML(c)}${mapb}
         </div>
       </div>
     </div>`;
@@ -254,6 +264,9 @@
     const back = app.querySelector("#back"); if (back) back.addEventListener("click",()=>{ location.hash = ""; });
 
     // open a card -> swipeable detail at that index
+    app.querySelectorAll(".chk").forEach(b=>{
+      b.addEventListener("click",(e)=>{ e.stopPropagation(); b.classList.toggle("done"); });
+    });
     app.querySelectorAll("[data-open]").forEach(el=>{
       const go = (e)=>{
         if (e.target.closest("a,button")) return;   // let inner links/buttons work
