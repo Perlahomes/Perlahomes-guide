@@ -1,14 +1,11 @@
 [
   {
-    "slug": "villa-aurora",
-    "name": "Villa Aurora"
-  },
-  {
-    "slug": "villa-palomar",
-    "name": "Villa Palomar"
-  },
-  {
     "slug": "villa-luna-sol",
-    "name": "Villa Luna Sol"
+     "name": "Villa Luna Sol" 
+  },
+  {
+    "slug": "Villa-Palomar",
+    "name": "Villa Palomar"
   }
+  
 ]
